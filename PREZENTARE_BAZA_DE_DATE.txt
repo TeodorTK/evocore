@@ -1,0 +1,473 @@
+================================================================================
+  EVOCORE — DOCUMENTAȚIE BAZĂ DE DATE
+  Proiect la materia „Baze de Date”
+  Magazin online (stil eMAG) — Python + Flask + SQLite / PostgreSQL
+================================================================================
+
+
+1. PREZENTARE GENERALĂ A PROIECTULUI
+--------------------------------------------------------------------------------
+
+EvoCore este un magazin online în limba română, dezvoltat ca proiect de
+facultate la disciplina Baze de Date. Aplicația web permite:
+
+  • navigarea unui catalog de produse organizat pe categorii;
+  • căutarea produselor;
+  • crearea de conturi de utilizator (înregistrare / autentificare);
+  • gestionarea unui coș de cumpărături persistent în baza de date;
+  • plasarea comenzilor și vizualizarea istoricului comenzilor.
+
+Datele sunt stocate într-o bază de date relațională cu 6 tabele, legate
+prin chei străine. Catalogul conține 100 de produse în 10 categorii,
+cu prețuri exprimate în lei (RON).
+
+Tehnologii:
+  • Backend: Python 3, framework Flask
+  • Baza de date: SQLite (dezvoltare locală) sau PostgreSQL (producție)
+  • Interfață: șabloane HTML (Jinja2) + CSS
+  • Producție: Vercel (hosting) + Neon (PostgreSQL gestionat în cloud)
+
+Fișiere relevante pentru baza de date:
+  • database.py  — schema, conexiune, adaptor dual-backend
+  • seed.py      — popularea inițială a datelor din folderul arhiva/
+  • app.py       — interogări SQL folosite de aplicație
+
+
+2. ARHITECTURA BAZEI DE DATE — DUAL-BACKEND
+--------------------------------------------------------------------------------
+
+Proiectul folosește o singură schemă logică, implementată pe două motoare
+de baze de date, în funcție de mediul de rulare:
+
+  ┌─────────────────────────────────────────────────────────────────────┐
+  │  Fără variabila DATABASE_URL  →  SQLite (fișier evocore.db)        │
+  │  Cu DATABASE_URL setată       →  PostgreSQL (ex: Neon în cloud)   │
+  └─────────────────────────────────────────────────────────────────────┘
+
+Motivul alegerii PostgreSQL în producție:
+  Platforma Vercel rulează aplicația în funcții serverless cu disc
+  temporar și read-only. SQLite, fiind un fișier local, ar pierde datele
+  la fiecare cerere. PostgreSQL este o bază externă, permanentă.
+
+Implementare (database.py):
+  • La import, se verifică existența variabilei de mediu DATABASE_URL.
+  • Funcția _schema() generează DDL adaptat motorului (tipuri ușor diferite).
+  • Funcția get_db() returnează o conexiune uniformă pentru ambele motoare.
+  • Pentru PostgreSQL există un adaptor _PgConn care traduce automat
+    marcajii de parametri din „?” (folosiți în tot codul) în „%s” (psycopg).
+
+Diferențe tehnice între motoare (aceeași schemă logică):
+
+  Concept              │ SQLite                          │ PostgreSQL
+  ─────────────────────┼─────────────────────────────────┼──────────────────────────
+  Cheie primară auto   │ INTEGER PRIMARY KEY AUTOINCREMENT│ SERIAL PRIMARY KEY
+  Numere reale (preț)  │ REAL                            │ DOUBLE PRECISION
+  Timestamp implicit   │ TEXT DEFAULT datetime('now')    │ TIMESTAMP DEFAULT NOW()
+
+Toată aplicația scrie interogări SQL cu marcajul „?” — un singur stil de cod
+pentru ambele baze de date.
+
+
+3. MODEL ENTITATE-RELAȚIE (ER)
+--------------------------------------------------------------------------------
+
+Entități principale și relațiile dintre ele:
+
+  categories (1) ──────< (∞) products
+       │
+       │                    products (∞) ──────< (∞) cart_items >────── (∞) users
+       │                         │
+       │                         │ (copie snapshot la momentul comenzii)
+       │                         ▼
+       └──────── users (1) ──────< (∞) orders (1) ──────< (∞) order_items
+                                        │
+                                        └── poate referi products (opțional)
+
+Descriere relații:
+
+  • O CATEGORIE conține multe PRODUSE (1:N).
+  • Un UTILIZATOR poate avea multe LINII DE COȘ (1:N).
+  • Un PRODUS poate apărea în mai multe coșuri (N:M realizat prin cart_items).
+  • Un UTILIZATOR plasează multe COMENZI (1:N).
+  • O COMANDĂ conține multe LINII DE COMANDĂ (1:N).
+  • O linie de comandă poate referi un produs (FK opțională), dar păstrează
+    și numele și prețul copiate la momentul achiziției (snapshot).
+
+Diagramă simplificată (text):
+
+    ┌─────────────┐         ┌─────────────┐
+    │ categories  │ 1     ∞ │  products   │
+    │─────────────│────────>│─────────────│
+    │ id (PK)     │         │ id (PK)     │
+    │ name        │         │ category_id │──FK──> categories.id
+    │ slug        │         │ name, price │
+    └─────────────┘         │ image, ...  │
+                            └──────┬──────┘
+                                   │
+         ┌─────────────┐           │           ┌─────────────┐
+         │   users     │ 1       ∞           │ cart_items  │
+         │─────────────│<───────────────────>│─────────────│
+         │ id (PK)     │    user_id (FK)     │ user_id(FK) │
+         │ email       │    product_id (FK)  │ product_id  │
+         │ password... │                     │ quantity    │
+         └──────┬──────┘                     └─────────────┘
+                │ 1
+                │ ∞
+         ┌──────▼──────┐         ┌─────────────┐
+         │   orders    │ 1     ∞ │ order_items │
+         │─────────────│────────>│─────────────│
+         │ id (PK)     │         │ order_id(FK)│
+         │ user_id(FK) │         │ product_id  │ (FK, nullable)
+         │ total       │         │ name, price │ (snapshot)
+         │ adresa...   │         │ quantity    │
+         └─────────────┘         └─────────────┘
+
+
+4. SCHEMA DETALIATĂ — CELE 6 TABELE
+--------------------------------------------------------------------------------
+
+4.1. Tabelul CATEGORIES (categorii de produse)
+──────────────────────────────────────────────
+Rol: grupează produsele în 10 categorii (ex: Laptopuri, Telefoane, Gaming).
+
+  Coloană   │ Tip              │ Constrângeri              │ Descriere
+  ──────────┼──────────────────┼───────────────────────────┼─────────────────────
+  id        │ INTEGER/SERIAL   │ PRIMARY KEY               │ Identificator unic
+  name      │ TEXT             │ NOT NULL, UNIQUE          │ Nume afișat
+  slug      │ TEXT             │ NOT NULL, UNIQUE          │ Nume pentru URL
+
+Exemplu date:
+  id=3, name="Electrocasnice Mari", slug="electrocasnice-mari"
+
+Slug-ul este generat automat din nume (fără diacritice, litere mici,
+spații înlocuite cu „-”) pentru URL-uri prietenoase:
+  /categorie/electrocasnice-mari
+
+
+4.2. Tabelul PRODUCTS (catalog produse — 100 înregistrări)
+──────────────────────────────────────────────────────────
+Rol: stochează toate produsele magazinului.
+
+  Coloană       │ Tip              │ Constrângeri                    │ Descriere
+  ──────────────┼──────────────────┼─────────────────────────────────┼──────────────
+  id            │ INTEGER/SERIAL   │ PRIMARY KEY                     │ ID produs
+  category_id   │ INTEGER          │ NOT NULL, FK → categories(id)   │ Categoria
+  name          │ TEXT             │ NOT NULL                        │ Denumire
+  price         │ REAL/DOUBLE      │ NOT NULL                        │ Preț în lei
+  description   │ TEXT             │                                 │ Descriere scurtă
+  specs         │ TEXT             │                                 │ Specificații
+  image         │ TEXT             │                                 │ Fișier imagine
+  stock         │ INTEGER          │ NOT NULL, DEFAULT 25            │ Stoc (afișare)
+
+Observații:
+  • id-ul produsului coincide cu numele imaginii: ex. produsul 42 → 42.webp
+  • specs este un text cu valori separate prin virgulă, afișat ca listă
+  • stock nu blochează comanda la checkout (este informativ)
+
+
+4.3. Tabelul USERS (conturi utilizatori)
+────────────────────────────────────────
+Rol: autentificare și identificare clienți.
+
+  Coloană         │ Tip              │ Constrângeri        │ Descriere
+  ────────────────┼──────────────────┼─────────────────────┼────────────────────
+  id              │ INTEGER/SERIAL   │ PRIMARY KEY         │ ID utilizator
+  name            │ TEXT             │ NOT NULL            │ Nume complet
+  email           │ TEXT             │ NOT NULL, UNIQUE    │ Email (login)
+  password_hash   │ TEXT             │ NOT NULL            │ Parolă hash-uită
+  created_at      │ TEXT/TIMESTAMP   │ NOT NULL, DEFAULT   │ Data înregistrării
+
+Securitate:
+  • Parolele NU sunt stocate în clar.
+  • Se folosește werkzeug.security.generate_password_hash (PBKDF2).
+  • Email-ul este salvat cu litere mici pentru unicitate consistentă.
+
+
+4.4. Tabelul CART_ITEMS (coș de cumpărături)
+─────────────────────────────────────────────
+Rol: persistă produsele din coșul fiecărui utilizator autentificat.
+
+  Coloană      │ Tip              │ Constrângeri                              │
+  ─────────────┼──────────────────┼───────────────────────────────────────────┤
+  id           │ INTEGER/SERIAL   │ PRIMARY KEY                               │
+  user_id      │ INTEGER          │ NOT NULL, FK → users(id) ON DELETE CASCADE│
+  product_id   │ INTEGER          │ NOT NULL, FK → products(id) ON DELETE CASCADE
+  quantity     │ INTEGER          │ NOT NULL, DEFAULT 1                       │
+               │                  │ UNIQUE (user_id, product_id)              │
+
+Constrângerea UNIQUE(user_id, product_id):
+  • Un utilizator poate avea o singură linie per produs în coș.
+  • La adăugarea aceluiași produs de două ori, cantitatea se incrementează
+    (pattern UPSERT — vezi secțiunea 6).
+
+ON DELETE CASCADE:
+  • Dacă se șterge un utilizator sau un produs, liniile de coș asociate
+    dispar automat.
+
+
+4.5. Tabelul ORDERS (comenzi — antet)
+─────────────────────────────────────
+Rol: înregistrează fiecare comandă plasată.
+
+  Coloană      │ Tip              │ Constrângeri              │ Descriere
+  ─────────────┼──────────────────┼───────────────────────────┼──────────────────
+  id           │ INTEGER/SERIAL   │ PRIMARY KEY               │
+  user_id      │ INTEGER          │ NOT NULL, FK → users(id)  │ Cine a comandat
+  total        │ REAL/DOUBLE      │ NOT NULL                  │ Total comandă
+  status       │ TEXT             │ NOT NULL, DEFAULT         │ Stare comandă
+               │                  │   'In procesare'          │
+  full_name    │ TEXT             │ NOT NULL                  │ Nume livrare
+  address      │ TEXT             │ NOT NULL                  │ Adresă
+  city         │ TEXT             │ NOT NULL                  │ Oraș
+  phone        │ TEXT             │ NOT NULL                  │ Telefon
+  created_at   │ TEXT/TIMESTAMP   │ NOT NULL, DEFAULT now     │ Data comenzii
+
+Datele de livrare sunt copiate la checkout — nu se iau din profilul
+utilizatorului, ci se introduc la fiecare comandă.
+
+
+4.6. Tabelul ORDER_ITEMS (linii de comandă)
+───────────────────────────────────────────
+Rol: detaliile fiecărei comenzi (ce produse, câte, la ce preț).
+
+  Coloană      │ Tip              │ Constrângeri                              │
+  ─────────────┼──────────────────┼───────────────────────────────────────────┤
+  id           │ INTEGER/SERIAL   │ PRIMARY KEY                               │
+  order_id     │ INTEGER          │ NOT NULL, FK → orders(id) ON DELETE CASCADE
+  product_id   │ INTEGER          │ FK → products(id), NULL permis             │
+  name         │ TEXT             │ NOT NULL                                  │
+  price        │ REAL/DOUBLE      │ NOT NULL                                  │
+  quantity     │ INTEGER          │ NOT NULL                                  │
+
+DECIZIE DE PROIECTARE IMPORTANTĂ — SNAPSHOT (copie istorică):
+  • Câmpurile name și price sunt COPIATE din products la momentul comenzii.
+  • product_id este opțional (poate fi NULL).
+  • Astfel, dacă un produs este redenumit, repricing sau șters din catalog,
+    comenzile vechi rămân corecte în istoric.
+  • Aceasta este o formă de denormalizare controlată, justificată pentru
+    integritatea datelor istorice (cerință tipică în e-commerce).
+
+
+5. CONSTRÂNGERI, INTEGRITATE REFERENȚIALĂ ȘI INDEXI
+--------------------------------------------------------------------------------
+
+5.1. Chei primare
+  Toate tabelele folosesc chei primare surrogate (id auto-increment).
+
+5.2. Chei străine (Foreign Keys)
+  ┌──────────────────┬────────────────────────────┬─────────────────────┐
+  │ Tabel            │ Coloană                    │ Referință           │
+  ├──────────────────┼────────────────────────────┼─────────────────────┤
+  │ products         │ category_id                │ categories(id)      │
+  │ cart_items       │ user_id                    │ users(id) CASCADE   │
+  │ cart_items       │ product_id                 │ products(id) CASCADE│
+  │ orders           │ user_id                    │ users(id)           │
+  │ order_items      │ order_id                   │ orders(id) CASCADE  │
+  │ order_items      │ product_id                 │ products(id)        │
+  └──────────────────┴────────────────────────────┴─────────────────────┘
+
+5.3. Constrângeri UNIQUE (index unic automat)
+  • categories.name
+  • categories.slug
+  • users.email
+  • cart_items(user_id, product_id) — pereche unică utilizator+produs
+
+5.4. Activarea FK în SQLite
+  SQLite nu activează cheile străine implicit. La fiecare conexiune se execută:
+    PRAGMA foreign_keys = ON;
+  PostgreSQL le aplică mereu.
+
+5.5. Indexi secundari
+  Nu sunt definiți indexi suplimentari — la 100 de produse, scanările
+  pe category_id sau căutările LIKE sunt suficient de rapide.
+  La scalare: s-ar recomanda index pe products(category_id).
+
+
+6. INTEROGĂRI SQL IMPORTANTE DIN APLICAȚIE
+--------------------------------------------------------------------------------
+
+6.1. SELECT — pagina principală (produse aleatoare)
+  SELECT * FROM products ORDER BY RANDOM() LIMIT 8;
+
+6.2. SELECT — listare categorie cu sortare
+  SELECT * FROM products WHERE category_id = ? ORDER BY price ASC;
+  (sortarea: pret-asc, pret-desc, nume — valori din whitelist, nu din input brut)
+
+6.3. SELECT — căutare (insensibilă la majuscule)
+  SELECT * FROM products
+  WHERE LOWER(name) LIKE ?
+     OR LOWER(description) LIKE ?
+     OR LOWER(specs) LIKE ?
+  ORDER BY name;
+  Parametrul: '%termen_cautat%' (lowercase)
+
+6.4. INSERT — înregistrare utilizator
+  INSERT INTO users (name, email, password_hash) VALUES (?, ?, ?);
+
+6.5. UPSERT — adăugare în coș (incrementare cantitate)
+  INSERT INTO cart_items (user_id, product_id, quantity)
+  VALUES (?, ?, ?)
+  ON CONFLICT(user_id, product_id)
+  DO UPDATE SET quantity = cart_items.quantity + excluded.quantity;
+
+  Notă: coloana quantity trebuie calificată (cart_items.quantity) în PostgreSQL,
+  altfel apare eroare de ambiguitate. Acest bug a fost descoperit la testarea
+  pe ambele motoare.
+
+6.6. JOIN — afișare coș
+  SELECT ci.id AS cart_id, ci.quantity, p.*
+  FROM cart_items ci
+  JOIN products p ON p.id = ci.product_id
+  WHERE ci.user_id = ?
+  ORDER BY ci.id;
+
+6.7. TRANZACȚIE LOGICĂ — finalizare comandă (mai multe operații)
+  a) INSERT INTO orders (...) VALUES (...) RETURNING id;
+  b) Pentru fiecare produs din coș:
+       INSERT INTO order_items (order_id, product_id, name, price, quantity)
+       VALUES (?, ?, ?, ?, ?);
+  c) DELETE FROM cart_items WHERE user_id = ?;
+  d) COMMIT;
+
+6.8. RETURNING id
+  Folosit după INSERT pentru a obține ID-ul generat pe ambele motoare:
+    INSERT INTO categories (name, slug) VALUES (?, ?) RETURNING id;
+  (SQLite ≥ 3.35 suportă RETURNING)
+
+
+7. POPULAREA BAZEI DE DATE (seed.py)
+--------------------------------------------------------------------------------
+
+Datele inițiale provin din folderul arhiva/, structurat astfel:
+  arhiva/
+    ├── Climatizare & Smart Home/
+    │     ├── produs1.txt (sau .rtf)
+    │     ├── produs1.png
+    │     └── ...
+    ├── Laptopuri, PC-uri & Servere/
+    └── ... (10 categorii, 10 produse fiecare)
+
+Pașii scriptului seed.py:
+
+  1. RESET
+     • SQLite: șterge fișierul evocore.db
+     • PostgreSQL: DROP TABLE ... CASCADE
+     • Șterge și regenerează static/img/products/
+
+  2. CREARE SCHEMĂ — init_db() execută DDL din database.py
+
+  3. PENTRU FIECARE CATEGORIE (folder din arhiva/):
+     a) INSERT în categories (name, slug) RETURNING id
+     b) Pentru fiecare fișier .txt/.rtf:
+        - parsează câmpurile: name, price, description, specs
+        - INSERT în products RETURNING id
+        - potrivește imaginea .png (potrivire exactă sau fuzzy pe cuvinte)
+        - comprimă imaginea în WebP (<id>.webp)
+        - UPDATE products SET image = '<id>.webp'
+
+  4. Rezultat: 10 categorii, 100 produse, 100 imagini
+
+Ordinea de inserare este deterministă (categorii sortate, fișiere sortate),
+astfel ID-urile sunt identice pe SQLite și PostgreSQL.
+
+
+8. NORMALIZARE ȘI JUSTIFICĂRI DE PROIECTARE
+--------------------------------------------------------------------------------
+
+8.1. Forma normală
+  • categories, products, users — în general 3NF (fără dependențe tranzitive
+    evidente pe chei non-primare).
+  • cart_items — tabel de legătură pentru relația N:M între users și products.
+  • orders + order_items — structură clasică antet-detaliu (1:N).
+
+8.2. Denormalizare intenționată
+  • order_items.name și order_items.price — copii la momentul comenzii.
+  • Justificare: păstrarea istoricului corect al tranzacțiilor comerciale.
+
+8.3. Separarea responsabilităților
+  • Parola: doar hash în DB, niciodată text clar.
+  • Imagini: stocate ca fișiere pe disc (static/img/products/), în DB doar
+    numele fișierului (products.image) — nu BLOB-uri în baza de date.
+
+
+9. MEDIUL DE PRODUCȚIE (VERCEL + NEON)
+--------------------------------------------------------------------------------
+
+  Componentă          │ Rol
+  ────────────────────┼────────────────────────────────────────────────────
+  Vercel              │ Hosting aplicație Flask (serverless)
+  Neon (PostgreSQL)   │ Bază de date permanentă în cloud
+  DATABASE_URL        │ Variabilă de mediu cu connection string Neon
+  SECRET_KEY          │ Cheie pentru sesiuni Flask (cookie-uri semnate)
+
+Flux deploy:
+  1. seed.py rulat local cu DATABASE_URL → Neon (populare inițială)
+  2. git push → Vercel redeployează automat
+  3. Aplicația pe Vercel citește/scrie în Neon
+
+Local (fără DATABASE_URL): evocore.db (SQLite), creat de seed.py.
+
+
+10. OPERAȚIUNI PE BAZA DE DATE — MAPARE FUNCȚIONALITĂȚI
+--------------------------------------------------------------------------------
+
+  Funcționalitate aplicație     │ Tabele implicate           │ Operație SQL
+  ─────────────────────────────┼────────────────────────────┼─────────────────
+  Pagina principală             │ products, categories       │ SELECT, RANDOM
+  Listare categorie             │ categories, products       │ SELECT, WHERE
+  Detaliu produs                │ products, categories       │ SELECT, JOIN
+  Căutare                       │ products                   │ SELECT, LIKE
+  Înregistrare                  │ users                      │ INSERT
+  Autentificare                 │ users                      │ SELECT
+  Coș — vizualizare             │ cart_items, products       │ SELECT, JOIN
+  Coș — adăugare                │ cart_items                 │ INSERT/UPSERT
+  Coș — modificare/ștergere     │ cart_items                 │ UPDATE/DELETE
+  Checkout                      │ orders, order_items,       │ INSERT, DELETE
+                                │ cart_items                 │
+  Istoric comenzi               │ orders                     │ SELECT
+  Detaliu comandă               │ orders, order_items        │ SELECT
+
+
+11. PUNCTE DE PREZENTAT LA EXAMEN / PROIECT
+--------------------------------------------------------------------------------
+
+  ✓ Bază relațională cu 6 tabele și relații 1:N și N:M (prin tabel asociativ)
+  ✓ Chei primare, chei străine, UNIQUE, NOT NULL, DEFAULT, ON DELETE CASCADE
+  ✓ Integritate referențială (PRAGMA foreign_keys în SQLite)
+  ✓ Dual-backend: același cod, SQLite + PostgreSQL
+  ✓ Interogări variate: SELECT, INSERT, UPDATE, DELETE, JOIN, UPSERT, RETURNING
+  ✓ Pattern snapshot pentru istoric comenzi (denormalizare justificată)
+  ✓ Securitate: parole hash-uite, parametri SQL (protecție injection)
+  ✓ Populare automată din surse structurate (arhiva/)
+  ✓ Deploy real cu PostgreSQL în cloud (Neon)
+
+
+12. COMENZI UTILE PENTRU DEMONSTRAȚIE
+--------------------------------------------------------------------------------
+
+  # Creare mediu și instalare dependențe
+  python3 -m venv venv
+  ./venv/bin/pip install -r requirements.txt
+
+  # Populare bază locală (SQLite)
+  ./venv/bin/python seed.py
+
+  # Pornire aplicație locală
+  ./venv/bin/python app.py
+  # → http://127.0.0.1:5000
+
+  # Inițializare doar schema (fără date)
+  ./venv/bin/python database.py
+
+  # Populare bază Neon (producție)
+  export DATABASE_URL="postgresql://..."
+  ./venv/bin/python seed.py
+
+  # Test automat flux principal
+  ./venv/bin/python smoke_test.py
+
+
+================================================================================
+  Document generat pentru prezentarea proiectului EvoCore — Baze de Date
+  Fișiere sursă: database.py, app.py, seed.py, CLAUDE.md
+================================================================================
