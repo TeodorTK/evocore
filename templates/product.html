@@ -13,7 +13,7 @@
     <div class="product-gallery">
         {% if product['image'] %}
             <img src="{{ url_for('static', filename='img/products/' ~ product['image']) }}"
-                 alt="{{ product['name'] }}">
+                 alt="{{ product['name'] }}" loading="lazy">
         {% endif %}
     </div>
     <div class="product-info">

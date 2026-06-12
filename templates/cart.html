@@ -22,7 +22,8 @@
             <td>
                 <div class="cart-prod">
                     {% if it['image'] %}
-                        <img src="{{ url_for('static', filename='img/products/' ~ it['image']) }}" alt="">
+                        <img src="{{ url_for('static', filename='img/products/' ~ it['image']) }}"
+                             alt="" loading="lazy">
                     {% endif %}
                     <a href="{{ url_for('product', pid=it['id']) }}">{{ it['name'] }}</a>
                 </div>

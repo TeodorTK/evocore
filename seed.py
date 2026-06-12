@@ -12,9 +12,11 @@ Ruleaza:  python seed.py
 import os
 import re
 import shutil
+from pathlib import Path
 import subprocess
 import unicodedata
 
+from compress_images import compress_image
 from database import BASE_DIR, IS_POSTGRES, get_db, init_db
 
 ARHIVA_DIR = os.path.join(BASE_DIR, "arhiva")
@@ -177,11 +179,10 @@ def seed():
 
             png = image_map.get(data)
             if png:
-                image_name = f"{pid}.png"
-                shutil.copy(
-                    os.path.join(cat_dir, png),
-                    os.path.join(IMG_DEST_DIR, image_name),
-                )
+                image_name = f"{pid}.webp"
+                src_img = os.path.join(cat_dir, png)
+                dest_img = os.path.join(IMG_DEST_DIR, image_name)
+                compress_image(Path(src_img), Path(dest_img))
                 conn.execute(
                     "UPDATE products SET image = ? WHERE id = ?", (image_name, pid))
 

@@ -15,7 +15,8 @@
         <a class="cat-card" href="{{ url_for('category', slug=item.category['slug']) }}">
             <div class="ci">
                 {% if item.sample and item.sample['image'] %}
-                    <img src="{{ url_for('static', filename='img/products/' ~ item.sample['image']) }}" alt="">
+                    <img src="{{ url_for('static', filename='img/products/' ~ item.sample['image']) }}"
+                         alt="" loading="lazy">
                 {% endif %}
             </div>
             <div class="cn">{{ item.category['name'] }}</div>
