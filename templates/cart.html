@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block title %}Cosul meu - EvoCore{% endblock %}
+
+{% block content %}
+<div class="breadcrumb"><a href="{{ url_for('index') }}">Acasa</a> / Cosul meu</div>
+<h1 class="section-title">Cosul meu</h1>
+
+{% if items %}
+<table class="cart-table">
+    <thead>
+        <tr>
+            <th>Produs</th>
+            <th>Pret</th>
+            <th>Cantitate</th>
+            <th>Subtotal</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for it in items %}
+        <tr>
+            <td>
+                <div class="cart-prod">
+                    {% if it['image'] %}
+                        <img src="{{ url_for('static', filename='img/products/' ~ it['image']) }}" alt="">
+                    {% endif %}
+                    <a href="{{ url_for('product', pid=it['id']) }}">{{ it['name'] }}</a>
+                </div>
+            </td>
+            <td>{{ lei(it['price']) }}</td>
+            <td>
+                <form method="post" action="{{ url_for('cart_update', cart_id=it['cart_id']) }}"
+                      style="display:flex;gap:6px;align-items:center">
+                    <input class="cart-qty" type="number" name="quantity"
+                           value="{{ it['quantity'] }}" min="0" max="99">
+                    <button class="btn btn-ghost btn-sm" type="submit">Actualizeaza</button>
+                </form>
+            </td>
+            <td><strong>{{ lei(it['price'] * it['quantity']) }}</strong></td>
+            <td>
+                <form method="post" action="{{ url_for('cart_remove', cart_id=it['cart_id']) }}">
+                    <button class="btn btn-danger btn-sm" type="submit">Sterge</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<div class="cart-summary">
+    <div class="row"><span>Subtotal</span><span>{{ lei(total) }}</span></div>
+    <div class="row"><span>Livrare</span>
+        <span>{% if total >= 200 %}Gratuit{% else %}{{ lei(19.99) }}{% endif %}</span>
+    </div>
+    <div class="row grand">
+        <span>Total</span>
+        <span>{{ lei(total if total >= 200 else total + 19.99) }}</span>
+    </div>
+    <a class="btn btn-block" href="{{ url_for('checkout') }}" style="margin-top:14px">
+        Finalizeaza comanda
+    </a>
+</div>
+{% else %}
+<div class="empty">
+    <div class="big">🛒</div>
+    <p>Cosul tau este gol.</p>
+    <a class="btn" href="{{ url_for('index') }}">Continua cumparaturile</a>
+</div>
+{% endif %}
+{% endblock %}

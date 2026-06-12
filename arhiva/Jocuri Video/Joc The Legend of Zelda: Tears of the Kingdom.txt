@@ -1,0 +1,7 @@
+name: Joc The Legend of Zelda: Tears of the Kingdom
+
+price: 329
+
+description: Continuarea legendarului joc de aventură open-world, permițând acum construirea de vehicule și explorarea cerului.
+
+specs: Gen: Action-Adventure, Format: Fizic, Exclusivitate Nintendo Switch, Premiat pentru inovație în gameplay.

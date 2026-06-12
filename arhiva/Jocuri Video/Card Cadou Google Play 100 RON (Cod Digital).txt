@@ -1,0 +1,7 @@
+name: Card Cadou Google Play 100 RON (Cod Digital)
+
+price: 100
+
+description: Credit pentru magazinul Android, perfect pentru cumpărarea de aplicații, jocuri, filme sau in-app purchases.
+
+specs: Format: Digital (Cod Activare instant pe email), Valoare: 100 RON, Platformă: Dispozitive Android.

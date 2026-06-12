@@ -1,0 +1,7 @@
+name: Mixer planetar KitchenAid Artisan
+
+price: 2999
+
+description: Designul iconic retro din fontă masivă, extrem de puternic pentru orice fel de aluat.
+
+specs: Putere 300W (Direct Drive), Bol inox 4.8L, 10 trepte de viteză, Include: Tel, Cârlig aluat, Paletă plată.

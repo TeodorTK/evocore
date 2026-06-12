@@ -1,0 +1,7 @@
+name: Cuptor incorporabil electric Electrolux SteamCrisp
+
+price: 2299
+
+description: Cuptor care adaugă abur în procesul de gătire pentru fripturi suculente la interior și crocante la exterior.
+
+specs: Capacitate 72L, Clasa energetică A+, Gătire cu Abur (SteamCrisp), Autocurățare Pirolitică, Control Touch.

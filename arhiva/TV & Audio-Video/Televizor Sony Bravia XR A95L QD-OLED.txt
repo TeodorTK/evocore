@@ -1,0 +1,7 @@
+name: Televizor Sony Bravia XR A95L QD-OLED
+
+price: 13499
+
+description: Cel mai bun televizor pentru acuratețea culorilor, folosind panoul QD-OLED revoluționar de la Sony.
+
+specs: Diagonala 139 cm (55"), QD-OLED 4K, Procesor Cognitive XR, Google TV, Acoustic Surface Audio+.

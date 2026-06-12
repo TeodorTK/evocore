@@ -1,0 +1,7 @@
+name: Plită pe gaz Bosch din sticlă neagră
+
+price: 1199
+
+description: Plită elegantă cu reglaj precis al flăcării în 9 pași (FlameSelect).
+
+specs: 4 arzătoare gaz, Suprafață sticlă termorezistentă neagră, Funcție FlameSelect, Grătare din fontă.

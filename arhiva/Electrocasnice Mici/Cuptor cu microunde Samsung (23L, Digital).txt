@@ -1,0 +1,7 @@
+name: Cuptor cu microunde Samsung (23L, Digital)
+
+price: 499
+
+description: Cuptor cu microunde cu interior din email ceramic, rezistent la zgârieturi și foarte ușor de curățat.
+
+specs: Capacitate 23L, Putere cuptor 800W, Interior Ceramic Enamel, Control electronic LED, Funcție Dezghețare Rapidă.

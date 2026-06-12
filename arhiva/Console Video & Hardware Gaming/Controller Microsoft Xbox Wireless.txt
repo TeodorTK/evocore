@@ -1,0 +1,7 @@
+name: Controller Microsoft Xbox Wireless
+
+price: 299
+
+description: Controllerul standard de Xbox, renumit pentru ergonomia sa perfectă și compatibilitatea nativă pe PC.
+
+specs: Conexiune Xbox Wireless și Bluetooth, D-pad hibrid, Textură grip pe triggere, Alimentare baterii AA sau acumulator dedicat.

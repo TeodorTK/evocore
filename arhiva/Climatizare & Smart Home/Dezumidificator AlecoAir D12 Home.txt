@@ -1,0 +1,7 @@
+name: Dezumidificator AlecoAir D12 Home
+
+price: 749
+
+description: Aparat eficient pentru combaterea igrasiei și condensului, ideal pentru băi, uscatorii sau camere cu probleme de umiditate.
+
+specs: Capacitate dezumidificare 12L/24h, Debit aer 120 mc/h, Higrostat digital încorporat, Timer, Rezervor 1.9L, Funcție Uscare Rufe.

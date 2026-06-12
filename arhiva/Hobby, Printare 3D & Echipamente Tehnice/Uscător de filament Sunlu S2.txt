@@ -1,0 +1,7 @@
+name: Uscător de filament Sunlu S2
+
+price: 259
+
+description: Cutie de uscare activă care elimină umiditatea din filament în timpul printării pentru a asigura o calitate maximă.
+
+specs: Încălzire uniformă la 360°, Temperatură maximă 70°C, Display LCD touchscreen, Compatibil cu role de 1kg.

@@ -1,0 +1,7 @@
+name: Purificator și umidificator Dyson Purifier Humidify+Cool
+
+price: 3499
+
+description: Senzori inteligenți detectează particulele și gazele, purifică, umidifică și ventilează igienic aerul din toată camera.
+
+specs: Funcție 3-în-1 (Purificator, Umidificator, Ventilator), Distrugere continuă formaldehidă, Tehnologie Ultraviolet Cleanse (elimină bacterii din apă), Control app Dyson Link.

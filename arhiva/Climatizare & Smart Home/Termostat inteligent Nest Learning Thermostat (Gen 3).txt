@@ -1,0 +1,7 @@
+name: Termostat inteligent Nest Learning Thermostat (Gen 3)
+
+price: 1199
+
+description: Un termostat cu design premium care învață programul tău și reglează automat centrala pentru a economisi energie.
+
+specs: Display color circular, Funcție Auto-Schedule, Control prin aplicație de la distanță, Compatibil cu marea majoritate a centralelor, Rapoarte de energie.

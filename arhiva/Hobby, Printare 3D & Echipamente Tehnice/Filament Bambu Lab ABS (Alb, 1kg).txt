@@ -1,0 +1,7 @@
+name: Filament Bambu Lab ABS (Alb, 1kg)
+
+price: 149
+
+description: Filament tradițional cu rezistență mecanică și termică ridicată, excelent pentru piese funcționale.
+
+specs: Material: ABS, Diametru 1.75mm, Greutate 1kg, Necesită masă încălzită la 90-110°C, Compatibil cu incinte închise.

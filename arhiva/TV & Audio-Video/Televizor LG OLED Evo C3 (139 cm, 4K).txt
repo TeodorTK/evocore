@@ -1,0 +1,7 @@
+name: Televizor LG OLED Evo C3 (139 cm, 4K)
+
+price: 5999
+
+description: Televizorul OLED de referință al anului, excelent atât pentru filme HDR cât și pentru gaming console.
+
+specs: Diagonala 139 cm (55"), Rezoluție 4K Ultra HD, Panou OLED evo, Procesor α9 AI Gen6, 4x HDMI 2.1, webOS.

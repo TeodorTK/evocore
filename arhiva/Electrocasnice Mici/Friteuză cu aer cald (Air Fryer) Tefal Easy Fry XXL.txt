@@ -1,0 +1,7 @@
+name: Friteuză cu aer cald (Air Fryer) Tefal Easy Fry XXL
+
+price: 599
+
+description: Gătește pentru toată familia cu până la 99% mai puțin ulei, folosind circulația rapidă a aerului fierbinte.
+
+specs: Capacitate 5.6L (până la 8 porții), Putere 1700W, 8 programe prestabilite, Control Digital, Temperatură reglabilă 80-200°C.

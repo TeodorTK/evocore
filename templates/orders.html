@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Comenzile mele - EvoCore{% endblock %}
+
+{% block content %}
+<div class="breadcrumb"><a href="{{ url_for('index') }}">Acasa</a> / Comenzile mele</div>
+<h1 class="section-title">Comenzile mele</h1>
+
+{% if orders %}
+<table class="cart-table">
+    <thead>
+        <tr>
+            <th>Comanda</th>
+            <th>Data</th>
+            <th>Status</th>
+            <th>Total</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for o in orders %}
+        <tr>
+            <td><strong>#{{ o['id'] }}</strong></td>
+            <td>{{ o['created_at'] }}</td>
+            <td><span class="status">{{ o['status'] }}</span></td>
+            <td><strong>{{ lei(o['total']) }}</strong></td>
+            <td><a class="btn btn-ghost btn-sm" href="{{ url_for('order_detail', order_id=o['id']) }}">Detalii</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<div class="empty">
+    <div class="big">📦</div>
+    <p>Nu ai plasat nicio comanda inca.</p>
+    <a class="btn" href="{{ url_for('index') }}">Incepe cumparaturile</a>
+</div>
+{% endif %}
+{% endblock %}

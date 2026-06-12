@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% from "_macros.html" import product_card with context %}
+{% block title %}Cautare: {{ q }} - EvoCore{% endblock %}
+
+{% block content %}
+<div class="breadcrumb"><a href="{{ url_for('index') }}">Acasa</a> / Cautare</div>
+
+<h1 class="section-title">
+    {% if q %}Rezultate pentru „{{ q }}" ({{ products|length }}){% else %}Cautare{% endif %}
+</h1>
+
+{% if products %}
+    <div class="grid">
+        {% for p in products %}
+            {{ product_card(p) }}
+        {% endfor %}
+    </div>
+{% elif q %}
+    <div class="empty">
+        <div class="big">🔍</div>
+        <p>Niciun produs gasit pentru „{{ q }}".</p>
+        <a class="btn btn-ghost" href="{{ url_for('index') }}">Inapoi la magazin</a>
+    </div>
+{% else %}
+    <div class="empty">
+        <div class="big">🔍</div>
+        <p>Scrie un termen in bara de cautare de sus.</p>
+    </div>
+{% endif %}
+{% endblock %}

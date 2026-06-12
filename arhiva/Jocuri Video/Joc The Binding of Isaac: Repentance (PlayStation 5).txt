@@ -1,0 +1,7 @@
+name: Joc The Binding of Isaac: Repentance (PlayStation 5)
+
+price: 249
+
+description: Experiența completă Isaac cu sute de iteme noi, inamici și finaluri, rulând fluent pe PS5.
+
+specs: Gen: Action/Roguelike, Format: Fizic (Disc), Optimizare PS5 60fps, Mod: Single/Co-op local.

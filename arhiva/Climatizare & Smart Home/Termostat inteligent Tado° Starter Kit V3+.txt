@@ -1,0 +1,7 @@
+name: Termostat inteligent Tado° Starter Kit V3+
+
+price: 999
+
+description: Kit excelent pentru apartamente, oferind control smart pe zone și detectare a geamurilor deschise.
+
+specs: Control geolocație (opțional), Detectare Fereastră Deschisă, Compatibil HomeKit/Alexa/Google, Afișaj LED matriceal, Conectivitate wireless la Bridge.

@@ -1,0 +1,7 @@
+name: Blender de masă NutriBullet Pro 900W
+
+price: 429
+
+description: Extractor de nutrienți compact, care pulverizează fructele, legumele și semințele direct în cana din care poți bea.
+
+specs: Putere 900W, Lama extractoare din oțel inoxidabil, Include cană înaltă 900ml, Fără BPA, Piese lavabile în mașina de vase.

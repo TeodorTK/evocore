@@ -1,0 +1,7 @@
+name: Căști Over-Ear Sony WH-1000XM5
+
+price: 1599
+
+description: Căști over-ear de referință în industrie pentru anularea activă a zgomotului și confort pe termen lung.
+
+specs: ANC de referință cu Auto NC Optimizer, Autonomie 30 de ore, Încărcare rapidă (3 min = 3 ore), Multi-point connection.

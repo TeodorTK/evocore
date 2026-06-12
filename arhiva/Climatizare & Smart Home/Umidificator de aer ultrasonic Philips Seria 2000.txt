@@ -1,0 +1,7 @@
+name: Umidificator de aer ultrasonic Philips Seria 2000
+
+price: 699
+
+description: Previne aerul uscat cu tehnologia NanoCloud care răspândește 99% mai puține bacterii decât umidificatoarele ultrasonice clasice.
+
+specs: Tehnologie NanoCloud de evaporare, Rezervor 2L, Senzor inteligent umiditate, Mod repaus silențios, Fără praf alb și mobilă umedă.

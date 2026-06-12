@@ -1,0 +1,17 @@
+{# Macro pentru un card de produs, refolosit in mai multe pagini. #}
+{% macro product_card(p) %}
+<a class="card" href="{{ url_for('product', pid=p['id']) }}">
+    <div class="thumb">
+        {% if p['image'] %}
+            <img src="{{ url_for('static', filename='img/products/' ~ p['image']) }}"
+                 alt="{{ p['name'] }}" loading="lazy">
+        {% else %}
+            <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><rect width='100%25' height='100%25' fill='%23e6f6ec'/></svg>" alt="">
+        {% endif %}
+    </div>
+    <div class="body">
+        <div class="pname">{{ p['name'] }}</div>
+        <div class="price">{{ lei(p['price']) }}</div>
+    </div>
+</a>
+{% endmacro %}

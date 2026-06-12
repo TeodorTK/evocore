@@ -1,0 +1,7 @@
+name: Hotă decorativă Beko
+
+price: 899
+
+description: Hotă înclinată cu un design modern de sticlă, ce oferă extracție puternică pentru o bucătărie fără mirosuri.
+
+specs: Putere absorbție max 631 m3/h, Lățime 60cm, 3 trepte de viteză, Iluminare LED, Filtru anti-grăsime lavabil.

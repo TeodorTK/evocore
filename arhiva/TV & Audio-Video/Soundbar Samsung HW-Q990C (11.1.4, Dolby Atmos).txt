@@ -1,0 +1,7 @@
+name: Soundbar Samsung HW-Q990C (11.1.4, Dolby Atmos)
+
+price: 4499
+
+description: Sistem home-cinema complet, livrând cel mai imersiv sunet 3D din clasa sa.
+
+specs: Configurație 11.1.4 canale, Putere totală 656W, Subwoofer wireless, Boxe spate wireless incluse, Dolby Atmos / DTS:X.

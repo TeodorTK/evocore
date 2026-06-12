@@ -1,0 +1,7 @@
+name: Consolă PlayStation 5 (Disc Edition)
+
+price: 2699
+
+description: Consola de ultimă generație de la Sony, capabilă de rezoluție 4K, ray-tracing și timpi de încărcare ultra-rapizi.
+
+specs: CPU AMD Zen 2, GPU AMD RDNA 2 (10.3 TFLOPS), 16GB GDDR6, SSD Custom 825GB, Unitate optică Blu-Ray.

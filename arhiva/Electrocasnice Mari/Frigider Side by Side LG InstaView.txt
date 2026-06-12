@@ -1,0 +1,7 @@
+name: Frigider Side by Side LG InstaView
+
+price: 6499
+
+description: Frigider spațios care permite vizualizarea interiorului printr-un panou de sticlă pe care îl atingi de două ori.
+
+specs: Capacitate totală 635L, Dozator gheață și apă, Compresor Linear Inverter, Clasa energetică E, Funcție No Frost.

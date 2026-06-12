@@ -1,0 +1,7 @@
+name: Consolă Xbox Series X
+
+price: 2499
+
+description: Cea mai puternică consolă Xbox, optimizată pentru Xbox Game Pass și performanță grafică maximă.
+
+specs: CPU AMD Zen 2, GPU AMD RDNA 2 (12 TFLOPS), 16GB GDDR6, SSD NVMe 1TB, Suport Quick Resume.

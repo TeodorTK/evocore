@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Comanda #{{ order['id'] }} - EvoCore{% endblock %}
+
+{% block content %}
+<div class="breadcrumb">
+    <a href="{{ url_for('index') }}">Acasa</a> /
+    <a href="{{ url_for('orders') }}">Comenzile mele</a> / #{{ order['id'] }}
+</div>
+
+<h1 class="section-title">Comanda #{{ order['id'] }}
+    <span class="status">{{ order['status'] }}</span>
+</h1>
+
+<div class="layout-2">
+    <div>
+        <table class="cart-table">
+            <thead>
+                <tr><th>Produs</th><th>Pret</th><th>Cant.</th><th>Subtotal</th></tr>
+            </thead>
+            <tbody>
+                {% for it in items %}
+                <tr>
+                    <td>{{ it['name'] }}</td>
+                    <td>{{ lei(it['price']) }}</td>
+                    <td>{{ it['quantity'] }}</td>
+                    <td><strong>{{ lei(it['price'] * it['quantity']) }}</strong></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="cart-summary" style="margin:0;max-width:none">
+        <h3 style="margin-top:0">Livrare</h3>
+        <p style="font-size:14px;line-height:1.7;color:var(--muted)">
+            {{ order['full_name'] }}<br>
+            {{ order['address'] }}<br>
+            {{ order['city'] }}<br>
+            Tel: {{ order['phone'] }}
+        </p>
+        <div class="row grand"><span>Total platit</span><span>{{ lei(order['total']) }}</span></div>
+        <p style="font-size:13px;color:var(--muted);margin-top:10px">
+            Plasata pe {{ order['created_at'] }}
+        </p>
+    </div>
+</div>
+{% endblock %}

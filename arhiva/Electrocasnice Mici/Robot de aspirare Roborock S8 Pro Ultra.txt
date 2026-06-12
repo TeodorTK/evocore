@@ -1,0 +1,7 @@
+name: Robot de aspirare Roborock S8 Pro Ultra
+
+price: 5999
+
+description: Robot complet autonom care își spală singur mopul, se golește automat și se reîncarcă cu apă.
+
+specs: Putere aspirare 6000 Pa, Sistem dublu de perii, Mop cu vibrații (VibraRise 2.0), Stație all-in-one de auto-curățare, Navigație LiDAR 3D.

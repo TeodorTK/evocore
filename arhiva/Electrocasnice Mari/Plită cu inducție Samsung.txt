@@ -1,0 +1,7 @@
+name: Plită cu inducție Samsung
+
+price: 1499
+
+description: Gătire rapidă și sigură, cu o zonă flexibilă care poate acomoda tăvi lungi sau vase de dimensiuni atipice.
+
+specs: 4 zone gătire inducție, Zona Flex Zone, Control tactil glisant (Slider Touch), Putere 7200W, Funcție Boost.

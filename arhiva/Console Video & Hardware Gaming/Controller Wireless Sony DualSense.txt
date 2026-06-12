@@ -1,0 +1,7 @@
+name: Controller Wireless Sony DualSense
+
+price: 349
+
+description: Controllerul inovator al PS5 care schimbă modul în care simți jocurile prin feedback haptic detaliat.
+
+specs: Feedback Haptic, Triggere Adaptive, Microfon integrat, Baterie reîncărcabilă, Port USB-C.

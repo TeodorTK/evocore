@@ -1,0 +1,7 @@
+name: Televizor Samsung Neo QLED 8K QN900C (163 cm)
+
+price: 14999
+
+description: Experiența supremă de vizionare de la Samsung, cu rezoluție 8K și un design Infinity practic fără margini.
+
+specs: Diagonala 163 cm (65"), Rezoluție 8K, Mini-LED (Quantum Matrix Technology Pro), Rata refresh 144Hz, Tizen OS.

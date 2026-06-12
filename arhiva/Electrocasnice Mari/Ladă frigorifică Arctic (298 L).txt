@@ -1,0 +1,7 @@
+name: Ladă frigorifică Arctic (298 L)
+
+price: 1299
+
+description: Spațiu generos pentru stocarea alimentelor pe termen lung, proiectată pentru a rezista la fluctuații de tensiune.
+
+specs: Capacitate 298L, Funcție Fast Freeze, Clasa energetică F, Panou de control cu LED, Autonomie fără curent 36 ore.

@@ -1,0 +1,7 @@
+name: Joc Super Mario Bros. Wonder (Nintendo Switch)
+
+price: 289
+
+description: Noua aventură 2D cu Mario, plină de efecte vizuale uimitoare și mecanici neașteptate (Wonder Flowers).
+
+specs: Gen: Platformer, Format: Fizic, Mod: 1-4 jucători (Local și Online), Exclusivitate Nintendo Switch.

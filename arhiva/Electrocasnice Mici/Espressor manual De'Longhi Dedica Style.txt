@@ -1,0 +1,7 @@
+name: Espressor manual De'Longhi Dedica Style
+
+price: 799
+
+description: Un espressor manual compact cu design metalic premium, apreciat pentru extracția constantă și designul îngust de doar 15cm.
+
+specs: Putere 1300W, Presiune 15 bari, Sistem termobloc, Duză pentru spumarea laptelui manual, Filtru pentru 1 sau 2 căni.

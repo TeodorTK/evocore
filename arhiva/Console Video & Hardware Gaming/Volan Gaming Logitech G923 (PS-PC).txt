@@ -1,0 +1,7 @@
+name: Volan Gaming Logitech G923 (PS/PC)
+
+price: 1499
+
+description: Sistem de volan și pedale pentru simulatoare auto, cu o tehnologie nouă de force-feedback realistă.
+
+specs: Tehnologie TRUEFORCE HD force feedback, Rotație 900 grade, Pedale din oțel (ambreiaj, frână, accelerație), Cusături de piele.

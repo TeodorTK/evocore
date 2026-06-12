@@ -1,0 +1,7 @@
+name: Imprimantă 3D Bambu Lab X1-Carbon Combo
+
+price: 7499
+
+description: Imprimantă 3D high-end rapidă, cu inteligență artificială, LiDAR și sistem automat de materiale (AMS) inclus.
+
+specs: Volum printare 256x256x256mm, Viteză maximă 500 mm/s, Hotend 300°C, Include unitate AMS (4 culori/materiale), Incintă complet închisă.

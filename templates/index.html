@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% from "_macros.html" import product_card with context %}
+{% block title %}EvoCore - Tehnologie si electrocasnice la preturi bune{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <h1>Bun venit la EvoCore 🌿</h1>
+    <p>Descopera mii de produse din 10 categorii: laptopuri, telefoane, gaming,
+       electrocasnice si multe altele. Preturi corecte, livrare rapida.</p>
+</section>
+
+<h2 class="section-title">Cumpara pe categorii</h2>
+<div class="cat-grid">
+    {% for item in cat_previews %}
+        <a class="cat-card" href="{{ url_for('category', slug=item.category['slug']) }}">
+            <div class="ci">
+                {% if item.sample and item.sample['image'] %}
+                    <img src="{{ url_for('static', filename='img/products/' ~ item.sample['image']) }}" alt="">
+                {% endif %}
+            </div>
+            <div class="cn">{{ item.category['name'] }}</div>
+        </a>
+    {% endfor %}
+</div>
+
+<h2 class="section-title">Recomandarile noastre</h2>
+<div class="grid">
+    {% for p in featured %}
+        {{ product_card(p) }}
+    {% endfor %}
+</div>
+{% endblock %}

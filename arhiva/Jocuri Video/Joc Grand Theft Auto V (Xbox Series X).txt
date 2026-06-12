@@ -1,0 +1,7 @@
+name: Joc Grand Theft Auto V (Xbox Series X)
+
+price: 149
+
+description: Clasicul modern, remasterizat special pentru noile console cu texturi și framerate îmbunătățite.
+
+specs: Gen: Open World/Action, Format: Fizic (Disc), Optimizare Xbox Series X (4K 60fps/Ray-Tracing), Include GTA Online.

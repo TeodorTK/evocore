@@ -1,0 +1,7 @@
+name: Televizor Philips Ambilight The One (126 cm, 4K)
+
+price: 2999
+
+description: Televizor cu un raport calitate-preț excelent, dotat cu iluminare ambientală pe spate pentru imersiune.
+
+specs: Diagonala 126 cm (50"), LED 4K, Ambilight pe 3 laturi, Suport Dolby Vision & Atmos, Android TV.

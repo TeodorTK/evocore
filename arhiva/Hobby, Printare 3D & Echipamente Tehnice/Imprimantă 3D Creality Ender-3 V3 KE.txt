@@ -1,0 +1,7 @@
+name: Imprimantă 3D Creality Ender-3 V3 KE
+
+price: 1499
+
+description: Varianta ultra-modernă a clasicului Ender 3, venind cu firmware Klipper pentru viteze foarte mari out-of-the-box.
+
+specs: Volum printare 220x220x240mm, Viteză max 500 mm/s, Extruder Sprite Direct Drive, Răcire dual-fan, Klipper preinstalat.

@@ -1,0 +1,7 @@
+name: Combină frigorifică Samsung Bespoke
+
+price: 3499
+
+description: Combină cu design minimalist și panouri frontale interschimbabile, integrându-se în orice bucătărie modernă.
+
+specs: Capacitate 390L, Tehnologie SpaceMax, Răcire All-Around Cooling, Clasa energetică C, Uși reversibile.

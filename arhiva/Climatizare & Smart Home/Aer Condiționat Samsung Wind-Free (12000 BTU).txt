@@ -1,0 +1,7 @@
+name: Aer Condiționat Samsung Wind-Free (12000 BTU)
+
+price: 2799
+
+description: Răcorește încăperea rapid, apoi menține temperatura fără curent de aer deranjant prin miile de micro-orificii.
+
+specs: Capacitate 12000 BTU, Tehnologie Wind-Free (fără flux direct), Clasa Răcire A++, Control Wi-Fi SmartThings, AI Auto Cooling.

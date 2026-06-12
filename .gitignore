@@ -1,0 +1,15 @@
+# Mediu virtual Python (se reinstaleaza din requirements.txt)
+venv/
+
+# Baza de date locala SQLite (in productie folosim PostgreSQL)
+evocore.db
+
+# Fisiere temporare Python
+__pycache__/
+*.pyc
+
+# Vercel
+.vercel/
+
+# Sistem
+.DS_Store

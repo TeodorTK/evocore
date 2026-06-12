@@ -1,0 +1,7 @@
+name: Kit Cască VR Meta Quest 3 (128GB)
+
+price: 2799
+
+description: Cea mai populară cască de realitate virtuală mixtă, care nu necesită un PC pentru a rula aplicații.
+
+specs: Lentile Pancake, Rezoluție 2064x2208 per ochi, Procesor Snapdragon XR2 Gen 2, Funcționalitate Full-Color Passthrough (Mixed Reality).

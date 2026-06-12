@@ -1,0 +1,7 @@
+name: Fier de călcat Philips Azur
+
+price: 379
+
+description: Călcare rapidă cu un debit puternic de abur și un sistem rapid de decalcifiere.
+
+specs: Putere 2600W, Jet de abur 250g, Debit continuu 50g/min, Talpă SteamGlide Advanced, Quick Calc Release.

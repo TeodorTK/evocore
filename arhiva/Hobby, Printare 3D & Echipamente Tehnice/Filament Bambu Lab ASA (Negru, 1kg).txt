@@ -1,0 +1,7 @@
+name: Filament Bambu Lab ASA (Negru, 1kg)
+
+price: 159
+
+description: Material tehnic extrem de rezistent la impact și la raze UV, ideal pentru piese folosite în exterior.
+
+specs: Material: ASA (Acrilonitril Stiren Acrilat), Diametru 1.75mm, Greutate 1kg, Temperatură printare 240-270°C.

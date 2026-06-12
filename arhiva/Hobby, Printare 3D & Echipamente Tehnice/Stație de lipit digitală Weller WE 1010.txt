@@ -1,0 +1,7 @@
+name: Stație de lipit digitală Weller WE 1010
+
+price: 850
+
+description: Stație de lipit profesională, ideală pentru electronică fină, reparații PCB și asamblare cabluri.
+
+specs: Putere 70W, Interval temperatură 100°C - 450°C, Control digital cu display LCD, Letcon ergonomic WEP 70, Cablu rezistent termic.

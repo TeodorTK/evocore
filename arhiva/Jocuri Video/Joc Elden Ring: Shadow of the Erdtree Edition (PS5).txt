@@ -1,0 +1,7 @@
+name: Joc Elden Ring: Shadow of the Erdtree Edition (PS5)
+
+price: 399
+
+description: Capodopera RPG premiată cu Jocul Anului, ce include acum și expansiunea masivă Shadow of the Erdtree.
+
+specs: Gen: Action-RPG, Format: Fizic (Disc), Conține jocul de bază + DLC pe disc, Studio: FromSoftware.

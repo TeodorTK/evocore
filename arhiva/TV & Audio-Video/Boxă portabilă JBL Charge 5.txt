@@ -1,0 +1,7 @@
+name: Boxă portabilă JBL Charge 5
+
+price: 749
+
+description: Boxă bluetooth robustă care livrează un bass puternic și poate încărca telefonul.
+
+specs: Putere 40W RMS, Autonomie 20 ore, Funcție Powerbank, Certificare IP67 (rezistentă la apă și praf), Bluetooth 5.1.

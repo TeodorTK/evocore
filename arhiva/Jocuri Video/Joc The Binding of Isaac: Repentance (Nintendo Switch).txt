@@ -1,0 +1,7 @@
+name: Joc The Binding of Isaac: Repentance (Nintendo Switch)
+
+price: 199
+
+description: Versiunea definitivă a faimosului roguelike, ideal pentru portabilitatea consolei Switch.
+
+specs: Gen: Action/Roguelike, Format: Fizic (Cartridge), Editia: Standard, Mod: Single/Co-op local.

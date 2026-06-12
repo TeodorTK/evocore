@@ -1,0 +1,7 @@
+name: Imprimantă 3D Elegoo Mars 4 Ultra (Rășină)
+
+price: 1799
+
+description: Imprimantă cu rășină ultra-precisă, excelentă pentru printarea de miniaturi, bijuterii și piese detaliate.
+
+specs: Rezoluție ecran 9K Mono LCD de 7 inch, Wi-Fi transfer, Volum printare 153x77x165mm, Viteză max 150mm/oră.

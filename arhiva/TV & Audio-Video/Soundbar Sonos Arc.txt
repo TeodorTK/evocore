@@ -1,0 +1,7 @@
+name: Soundbar Sonos Arc
+
+price: 4699
+
+description: Soundbar premium inteligent cu suport Dolby Atmos, care se integrează perfect în ecosistemul multi-room Sonos.
+
+specs: 11 amplificatoare digitale Class-D, Dolby Atmos, Control vocal (Alexa / Google Assistant), Conexiune Wi-Fi și eARC.

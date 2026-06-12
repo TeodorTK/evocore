@@ -1,0 +1,7 @@
+name: Consolă portabilă ASUS ROG Ally (Z1 Extreme)
+
+price: 3499
+
+description: O consolă portabilă puternică cu Windows 11, compatibilă cu toate platformele de jocuri majore.
+
+specs: Display 7" FHD 120Hz, Procesor AMD Ryzen Z1 Extreme, 16GB LPDDR5, 512GB PCIe 4.0 SSD, Windows 11.

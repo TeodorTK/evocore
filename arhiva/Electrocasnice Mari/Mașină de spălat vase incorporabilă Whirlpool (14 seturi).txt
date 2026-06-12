@@ -1,0 +1,7 @@
+name: Mașină de spălat vase incorporabilă Whirlpool (14 seturi)
+
+price: 1999
+
+description: Mașină silențioasă și încăpătoare cu tehnologie Al Șaselea Simț care ajustează automat apa și temperatura.
+
+specs: Capacitate 14 seturi, Lățime 60cm, Clasa energetică D, Tehnologie 6th Sense, Funcție PowerClean Pro.

@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% from "_macros.html" import product_card with context %}
+{% block title %}{{ product['name'] }} - EvoCore{% endblock %}
+
+{% block content %}
+<div class="breadcrumb">
+    <a href="{{ url_for('index') }}">Acasa</a> /
+    <a href="{{ url_for('category', slug=category['slug']) }}">{{ category['name'] }}</a> /
+    {{ product['name'] }}
+</div>
+
+<div class="product-page">
+    <div class="product-gallery">
+        {% if product['image'] %}
+            <img src="{{ url_for('static', filename='img/products/' ~ product['image']) }}"
+                 alt="{{ product['name'] }}">
+        {% endif %}
+    </div>
+    <div class="product-info">
+        <div class="product-cat">{{ category['name'] }}</div>
+        <h1>{{ product['name'] }}</h1>
+        <div class="product-price">{{ lei(product['price']) }}</div>
+        <div class="in-stock">✔ In stoc — livrare in 24-48h</div>
+
+        {% if product['description'] %}
+            <p class="product-desc">{{ product['description'] }}</p>
+        {% endif %}
+
+        <form class="add-form" method="post"
+              action="{{ url_for('cart_add', pid=product['id']) }}">
+            <input class="qty" type="number" name="quantity" value="1" min="1" max="99">
+            <button class="btn btn-accent" type="submit">🛒 Adauga in cos</button>
+        </form>
+    </div>
+</div>
+
+{% if spec_list %}
+<h2 class="section-title">Specificatii</h2>
+<ul class="spec-list">
+    {% for s in spec_list %}
+        <li>{{ s }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+{% if similar %}
+<h2 class="section-title">Produse similare</h2>
+<div class="grid">
+    {% for p in similar %}
+        {{ product_card(p) }}
+    {% endfor %}
+</div>
+{% endif %}
+{% endblock %}

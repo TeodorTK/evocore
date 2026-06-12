@@ -1,0 +1,7 @@
+name: Căști Gaming PlayStation Pulse 3D
+
+price: 499
+
+description: Căști wireless proiectate special pentru a profita de motorul de sunet 3D Tempest al consolei PlayStation 5.
+
+specs: Suport audio 3D PS5, 2 microfoane ascunse cu noise-cancelling, Conectivitate wireless cu dongle USB, Jack 3.5mm opțional.

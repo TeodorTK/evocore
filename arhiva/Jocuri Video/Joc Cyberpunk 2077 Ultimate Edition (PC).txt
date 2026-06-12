@@ -1,0 +1,7 @@
+name: Joc Cyberpunk 2077 Ultimate Edition (PC)
+
+price: 299
+
+description: Experiența supremă sci-fi open world care include jocul principal complet refăcut și expansiunea Phantom Liberty.
+
+specs: Gen: Action-RPG, Format: Digital (Cod GOG/Steam), Necesită PC performant pentru ray-tracing.

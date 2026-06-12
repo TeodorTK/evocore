@@ -1,0 +1,7 @@
+name: Imprimantă 3D Bambu Lab P1S
+
+price: 3699
+
+description: O imprimantă de bază complet închisă, care oferă calitatea superioară a seriei X1 la un preț mai accesibil.
+
+specs: Volum printare 256x256x256mm, CoreXY 500 mm/s, Extruder Direct Drive, Incintă închisă cu filtru carbon, Wi-Fi.

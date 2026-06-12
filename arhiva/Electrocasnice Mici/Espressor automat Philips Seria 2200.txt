@@ -1,0 +1,7 @@
+name: Espressor automat Philips Seria 2200
+
+price: 1499
+
+description: Aparat de cafea automat cu râșniță ceramică și sistem clasic de spumare a laptelui.
+
+specs: Putere 1500W, Presiune 15 bari, Râșniță ceramică 12 trepte, Rezervor apă 1.8L, Băuturi preparate: Espresso / Cafea / Apă caldă.

@@ -1,0 +1,7 @@
+name: Filament HIPS pentru suport dizolvabil (1kg)
+
+price: 129
+
+description: Filament folosit în general ca material de suport pentru ABS, dizolvându-se complet în D-Limonen.
+
+specs: Material: HIPS, Diametru 1.75mm, Greutate 1kg, Solubil chimic, Ideal pentru printare dual-extrusion.

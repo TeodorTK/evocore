@@ -1,0 +1,7 @@
+name: Abonament PlayStation Plus Extra (12 Luni)
+
+price: 630
+
+description: Abonament anual ce oferă acces la un catalog uriaș cu sute de jocuri PS4 și PS5 la cerere.
+
+specs: Format: Digital (Cod Activare), Durată: 12 Luni, Beneficii: Multiplayer online, Jocuri lunare, Catalog Extra, Cloud Saves.

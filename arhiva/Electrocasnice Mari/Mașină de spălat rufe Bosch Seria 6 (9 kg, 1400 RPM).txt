@@ -1,0 +1,7 @@
+name: Mașină de spălat rufe Bosch Seria 6 (9 kg, 1400 RPM)
+
+price: 2599
+
+description: Mașină extrem de eficientă, echipată cu motor EcoSilence Drive și funcții anti-pete.
+
+specs: Capacitate 9 kg, Viteză centrifugare 1400 RPM, Motor EcoSilence Inverter, Clasa energetică A, Sistem i-DOS (dozare automată).

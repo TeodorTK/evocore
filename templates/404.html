@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Pagina nu a fost gasita - EvoCore{% endblock %}
+{% block content %}
+<div class="empty" style="margin-top:30px">
+    <div class="big">🌿</div>
+    <h1>404 — Pagina nu a fost gasita</h1>
+    <p>Ne pare rau, pagina cautata nu exista.</p>
+    <a class="btn" href="{{ url_for('index') }}">Inapoi la magazin</a>
+</div>
+{% endblock %}

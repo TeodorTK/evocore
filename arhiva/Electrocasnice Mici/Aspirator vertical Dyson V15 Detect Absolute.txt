@@ -1,0 +1,7 @@
+name: Aspirator vertical Dyson V15 Detect Absolute
+
+price: 3499
+
+description: Cel mai inteligent aspirator Dyson, dotat cu laser verde pentru a detecta praful microscopic de pe podelele dure.
+
+specs: Putere de aspirare 240 AW, Autonomie 60 min, Ecran LCD (afișează particulele), Perie iluminată cu Laser, Filtrare HEPA.

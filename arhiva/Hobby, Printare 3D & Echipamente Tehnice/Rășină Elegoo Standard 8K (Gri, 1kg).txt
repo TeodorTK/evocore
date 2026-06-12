@@ -1,0 +1,7 @@
+name: Rășină Elegoo Standard 8K (Gri, 1kg)
+
+price: 149
+
+description: Rășină fotopolimerică optimizată pentru imprimante de înaltă rezoluție pentru detalii extrem de fine.
+
+specs: Rășină Standard, Sensibilă la UV 405nm, Greutate 1kg, Contracție redusă, Culoare Gri mat.

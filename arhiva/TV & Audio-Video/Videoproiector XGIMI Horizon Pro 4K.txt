@@ -1,0 +1,7 @@
+name: Videoproiector XGIMI Horizon Pro 4K
+
+price: 7999
+
+description: Proiector smart plug-and-play cu rezoluție 4K, sistem audio Harman Kardon și Android TV integrat.
+
+specs: Rezoluție 4K UHD, Luminozitate 2200 ANSI Lumeni, Auto-Keystone și Auto-Focus, Android TV 10, Difuzoare Harman Kardon 16W.

@@ -1,0 +1,7 @@
+name: Aer Condiționat Daikin Sensira (12000 BTU, Inverter)
+
+price: 2999
+
+description: Sistem de climatizare de încredere, extrem de silențios și eficient din punct de vedere energetic.
+
+specs: Capacitate 12000 BTU, Tehnologie Inverter, Clasa Răcire A++, Freon R32, Mod econo / Mod silențios.

@@ -1,0 +1,7 @@
+name: Sistem de ventilație cu recuperare de căldură Prana 150
+
+price: 2499
+
+description: Ventilație descentralizată care aduce aer proaspăt în cameră reținând căldura pe timpul iernii.
+
+specs: Debit de aer la admisie 105 m³/h, Eficiență recuperare până la 95%, Schimbător de căldură din Cupru anticuperare bacterii, Control Bluetooth/Aplicație telefon.

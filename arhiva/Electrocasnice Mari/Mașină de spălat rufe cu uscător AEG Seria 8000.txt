@@ -1,0 +1,7 @@
+name: Mașină de spălat rufe cu uscător AEG Seria 8000
+
+price: 4299
+
+description: O soluție 2-în-1 premium care curăță și usucă complet hainele într-un singur ciclu neîntrerupt.
+
+specs: Capacitate spălare 10 kg / uscare 6 kg, Tehnologie pompă de căldură (ÖKOKombi), Clasa energetică C/C, Motor Inverter Magnet Permanent.

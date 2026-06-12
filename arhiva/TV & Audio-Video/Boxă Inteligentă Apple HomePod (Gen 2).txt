@@ -1,0 +1,7 @@
+name: Boxă Inteligentă Apple HomePod (Gen 2)
+
+price: 1749
+
+description: Boxă inteligentă care oferă o fidelitate audio uimitoare și este hub-ul perfect pentru casa smart (Apple HomeKit).
+
+specs: Audio Computațional, Suport Spatial Audio, Integrare Siri, Senzori de temperatură și umiditate, Chip S7.

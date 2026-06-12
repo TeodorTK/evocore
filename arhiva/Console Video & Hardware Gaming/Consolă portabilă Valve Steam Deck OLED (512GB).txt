@@ -1,0 +1,7 @@
+name: Consolă portabilă Valve Steam Deck OLED (512GB)
+
+price: 3199
+
+description: PC de gaming la purtător, rulând o librărie masivă de jocuri Steam pe un ecran superb HDR.
+
+specs: Display 7.4" OLED 90Hz HDR, APU AMD Custom, 16GB RAM LPDDR5, 512GB NVMe SSD, Sistem de operare SteamOS.

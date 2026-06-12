@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% from "_macros.html" import product_card with context %}
+{% block title %}{{ category['name'] }} - EvoCore{% endblock %}
+
+{% block content %}
+<div class="breadcrumb">
+    <a href="{{ url_for('index') }}">Acasa</a> / {{ category['name'] }}
+</div>
+
+<div class="cat-head">
+    <h1>{{ category['name'] }} <span style="color:var(--muted);font-size:15px;font-weight:400">({{ products|length }} produse)</span></h1>
+    <form class="sort-form" method="get">
+        <label for="sort" style="font-size:13px;color:var(--muted)">Sorteaza:</label>
+        <select id="sort" name="sort" onchange="this.form.submit()">
+            <option value="" {% if sort=='' %}selected{% endif %}>Recomandate</option>
+            <option value="pret-asc" {% if sort=='pret-asc' %}selected{% endif %}>Pret crescator</option>
+            <option value="pret-desc" {% if sort=='pret-desc' %}selected{% endif %}>Pret descrescator</option>
+            <option value="nume" {% if sort=='nume' %}selected{% endif %}>Nume (A-Z)</option>
+        </select>
+    </form>
+</div>
+
+<div class="grid">
+    {% for p in products %}
+        {{ product_card(p) }}
+    {% endfor %}
+</div>
+{% endblock %}

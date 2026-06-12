@@ -1,0 +1,7 @@
+name: Aparat de ras electric Braun Series 9 Pro
+
+price: 1699
+
+description: Cel mai avansat aparat de ras de la Braun, capturând chiar și firele aspre de barbă de o zi sau de 7 zile.
+
+specs: Tehnologie Sonică (10.000 micro-vibrații), Cap de ras 5 elemente, Folosire Umed/Uscat (Wet&Dry), Stație curățare SmartCare.

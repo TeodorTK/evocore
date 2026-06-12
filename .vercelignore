@@ -1,0 +1,9 @@
+# Nu urca pe Vercel fisierele care nu sunt necesare la rulare.
+# (Imaginile produselor din static/img/products RAMAN incluse.)
+venv/
+arhiva/
+evocore.db
+__pycache__/
+*.pyc
+.DS_Store
+smoke_test.py

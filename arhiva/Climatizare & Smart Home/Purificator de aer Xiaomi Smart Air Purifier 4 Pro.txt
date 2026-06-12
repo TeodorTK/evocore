@@ -1,0 +1,7 @@
+name: Purificator de aer Xiaomi Smart Air Purifier 4 Pro
+
+price: 1199
+
+description: Elimină alergenii, mirosurile și poluanții din aer pentru încăperi de dimensiuni mari.
+
+specs: Acoperire până la 60 mp, CADR particule 500 m3/h, Filtrare HEPA + Carbon activ, Display OLED, Control Wi-Fi/Aplicație Mi Home.

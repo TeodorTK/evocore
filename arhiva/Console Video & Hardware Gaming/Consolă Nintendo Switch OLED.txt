@@ -1,0 +1,7 @@
+name: Consolă Nintendo Switch OLED
+
+price: 1699
+
+description: Versiunea revizuită a popularei console hibride, acum cu un ecran OLED vibrant pentru modul portabil.
+
+specs: Display OLED 7", Memorie internă 64GB, Dock cu port LAN inclus, Suport kickstand ajustabil, Controllere Joy-Con detașabile.

@@ -1,0 +1,7 @@
+name: Senzor de temperatură și umiditate Aqara
+
+price: 99
+
+description: Senzor minimalist și foarte ieftin care monitorizează clima interioră; necesită un Hub Zigbee pentru conectare.
+
+specs: Protocol Zigbee, Baterie CR2032 (autonomie aprox. 2 ani), Precis la ±0.3°C, Compatibil Apple HomeKit (prin hub-ul Aqara).

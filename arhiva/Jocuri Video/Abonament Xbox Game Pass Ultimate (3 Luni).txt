@@ -1,0 +1,7 @@
+name: Abonament Xbox Game Pass Ultimate (3 Luni)
+
+price: 195
+
+description: Cel mai bun pachet de gaming, oferind sute de jocuri pe consolă, PC și Cloud Gaming.
+
+specs: Format: Digital (Cod Activare), Durată: 3 Luni, Beneficii: Xbox Live Gold, EA Play, Game Pass pentru Consolă și PC.

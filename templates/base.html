@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}EvoCore - Magazin online{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>">
+</head>
+<body>
+
+<!-- Bara de sus -->
+<div class="topbar">
+    <div class="container">
+        <span>🚚 Livrare gratuita la comenzi peste 200 lei</span>
+        <span>
+            {% if user %}
+                Salut, {{ user['name'].split()[0] }} ·
+                <a href="{{ url_for('orders') }}">Comenzile mele</a> ·
+                <a href="{{ url_for('logout') }}">Deconectare</a>
+            {% else %}
+                <a href="{{ url_for('login') }}">Autentificare</a> ·
+                <a href="{{ url_for('register') }}">Cont nou</a>
+            {% endif %}
+        </span>
+    </div>
+</div>
+
+<!-- Header principal -->
+<header class="header">
+    <div class="container">
+        <a href="{{ url_for('index') }}" class="logo">
+            <span class="leaf">🌿</span>Evo<span class="core">Core</span>
+        </a>
+        <form class="search" action="{{ url_for('search') }}" method="get">
+            <input type="text" name="q" placeholder="Cauta printre mii de produse..."
+                   value="{{ request.args.get('q', '') }}">
+            <button type="submit">Cauta</button>
+        </form>
+        <div class="header-actions">
+            <a href="{{ url_for('orders') if user else url_for('login') }}">👤 Cont</a>
+            <a href="{{ url_for('cart') }}" class="cart-link">🛒 Cos
+                {% if cart_count > 0 %}<span class="cart-badge">{{ cart_count }}</span>{% endif %}
+            </a>
+        </div>
+    </div>
+</header>
+
+<!-- Bara de categorii -->
+<nav class="catbar">
+    <div class="container">
+        {% for c in all_categories %}
+            <a href="{{ url_for('category', slug=c['slug']) }}">{{ c['name'] }}</a>
+        {% endfor %}
+    </div>
+</nav>
+
+<main class="container">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flashes">
+                {% for category, message in messages %}
+                    <div class="flash {{ category }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="cols">
+            <div>
+                <h4>🌿 EvoCore</h4>
+                <p>Magazinul tau online de tehnologie si electrocasnice.
+                   Produse de calitate, livrate rapid in toata Romania.</p>
+            </div>
+            <div>
+                <h4>Clienti</h4>
+                <a href="{{ url_for('orders') if user else url_for('login') }}">Contul meu</a>
+                <a href="{{ url_for('cart') }}">Cosul meu</a>
+                <a href="#">Retur produse</a>
+            </div>
+            <div>
+                <h4>Informatii</h4>
+                <a href="#">Despre noi</a>
+                <a href="#">Termeni si conditii</a>
+                <a href="#">Confidentialitate</a>
+            </div>
+            <div>
+                <h4>Contact</h4>
+                <a href="#">0800 123 456</a>
+                <a href="#">contact@evocore.ro</a>
+            </div>
+        </div>
+        <div class="copy">© 2026 EvoCore. Toate drepturile rezervate.</div>
+    </div>
+</footer>
+
+</body>
+</html>
