@@ -49,6 +49,40 @@ def compress_image(src: Path, dest: Path) -> tuple[int, int]:
     return before, after
 
 
+def sync_image_db(*, dry_run: bool = False) -> int:
+    """Actualizează products.image de la .png/.jpg la .webp (ex. după deploy)."""
+    conn = get_db()
+    rows = conn.execute(
+        "SELECT id, image FROM products WHERE image IS NOT NULL"
+    ).fetchall()
+
+    updated = 0
+    for row in rows:
+        old_name = row["image"]
+        if not old_name or old_name.lower().endswith(".webp"):
+            continue
+        new_name = f"{Path(old_name).stem}.webp"
+        if not (IMG_DIR / new_name).is_file():
+            continue
+        if dry_run:
+            print(f"  [dry-run] DB #{row['id']}: {old_name} -> {new_name}")
+        else:
+            conn.execute(
+                "UPDATE products SET image = ? WHERE id = ?",
+                (new_name, row["id"]),
+            )
+        updated += 1
+
+    if not dry_run:
+        conn.commit()
+    conn.close()
+
+    if updated:
+        label = "ar actualiza" if dry_run else "actualizate"
+        print(f"  Baza de date: {updated} înregistrări {label} (.png -> .webp).")
+    return updated
+
+
 def compress_product_images(*, dry_run: bool = False) -> dict:
     """Procesează toate imaginile din static/img/products/."""
     if not IMG_DIR.is_dir():
@@ -61,6 +95,7 @@ def compress_product_images(*, dry_run: bool = False) -> dict:
     )
     if not sources:
         print("Nicio imagine PNG/JPEG de comprimat.")
+        sync_image_db(dry_run=dry_run)
         return {"files": 0, "saved": 0}
 
     updates: list[tuple[str, str]] = []
@@ -109,8 +144,12 @@ def compress_product_images(*, dry_run: bool = False) -> dict:
 
 if __name__ == "__main__":
     dry = "--dry-run" in sys.argv
+    sync_only = "--sync-db" in sys.argv
     try:
-        compress_product_images(dry_run=dry)
+        if sync_only:
+            sync_image_db(dry_run=dry)
+        else:
+            compress_product_images(dry_run=dry)
     except ImportError:
         print("Lipsește Pillow. Rulează: ./venv/bin/pip install Pillow")
         sys.exit(1)
